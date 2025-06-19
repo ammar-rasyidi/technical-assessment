@@ -69,8 +69,60 @@ https://drive.google.com/file/d/1RPpMXUuMV-ArJAMijXAIgmM0avoD-1jt/view?usp=shari
 
 ## 🛠️ System Requirements
 
-Before running the app, ensure your environment meets the following:
+Before running the app, make sure your system is set up with the following:
 
-- **Node.js**: Version `23.4.0`
+- **Node.js**: Version `23.4.0`  
+- **MongoDB**: Local instance running at default port `27017`
+
+ c 🧾 .env Setup
+
+Create a `.env` file in the root directory and add the following:
+
+```env
+MONGODB_URI=mongodb://127.0.0.1:27017
+MONGODB_DATABASE=technical_assessment
+MONGODB_USER=
+MONGODB_PASSWORD=
+MONGODB_USER and MONGODB_PASSWORD can be left empty for local development without authentication.
+```
+
+## 🌱 Seeding the Database
+
+To populate the database with sample transactions, run:
+
+```bash
+npm run seed
+```
+
+This will:
+
+* Connect to your local **MongoDB**
+* Clear all existing transactions
+* Insert **50 random transactions** with varying:
+
+  * Types (`Stake`, `Borrow`, `Lend`)
+  * Tokens (`ETH`, `USDC`, `DAI`, etc.)
+  * Statuses (`pending`, `completed`, `failed`)
+  * Descriptions
 
 ---
+
+## ▶️ Getting Started
+
+### Install dependencies:
+
+```bash
+npm install
+```
+
+### Run the development server:
+
+```bash
+npm run dev
+```
+
+The app should be accessible at:
+
+```
+http://localhost:3000
+```
