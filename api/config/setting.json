@@ -1,0 +1,5 @@
+{
+    "appName": "My Cool App",
+    "logLevel": "debug",
+    "port": 3000
+  }
