@@ -74,8 +74,7 @@ Before running the app, make sure your system is set up with the following:
 - **Node.js**: Version `23.4.0`  
 - **MongoDB**: Local instance running at default port `27017`
 
- c 🧾 .env Setup
-
+**env Setup**
 Create a `.env` file in the root directory and add the following:
 
 ```env
@@ -83,8 +82,8 @@ MONGODB_URI=mongodb://127.0.0.1:27017
 MONGODB_DATABASE=technical_assessment
 MONGODB_USER=
 MONGODB_PASSWORD=
-MONGODB_USER and MONGODB_PASSWORD can be left empty for local development without authentication.
 ```
+MONGODB_USER and MONGODB_PASSWORD can be left empty for local development without authentication.
 
 ## 🌱 Seeding the Database
 
