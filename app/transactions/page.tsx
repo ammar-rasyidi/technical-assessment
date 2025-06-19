@@ -219,7 +219,7 @@ export default function Transactions() {
               {transactions.map((transaction, index) => (
                 <tr 
                   key={transaction.id} 
-                  className={index % 2 === 0 ? 'bg-gray-50 text-gray-800' : 'bg-white text-gray-800'}
+                  className="text-gray-800 transition-colors duration-200 odd:bg-white even:bg-gray-200 hover:bg-gray-300"
                 >
                   <td className="border-b px-4 py-3 text-gray-800">{transaction.username}</td>
                   <td className="border-b px-4 py-3">
