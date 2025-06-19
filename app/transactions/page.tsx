@@ -21,10 +21,10 @@ export default function Transactions() {
   const [formData, setFormData] = useState({
     username: '',
     transactionType: 'Stake' as 'Stake' | 'Borrow' | 'Lend',
-    token: '',
+    token: 'ETH',
     amount: 0,
     description: '',
-    status: 'Pending'
+    status: 'pending'
   });
 
   const SUPPORTED_TOKENS = [
@@ -86,10 +86,10 @@ export default function Transactions() {
     setFormData({
       username: '',
       transactionType: 'Stake',
-      token: '',
+      token: 'ETH',
       amount: 0,
       description: '',
-      status: 'Pending'
+      status: 'pending'
     });
   };
 
@@ -108,7 +108,7 @@ export default function Transactions() {
       token: transaction.token,
       amount: transaction.amount,
       description: transaction.description || '',
-      status: transaction.status || 'Pending'
+      status: transaction.status || 'pending'
     });
     setIsEditModalOpen(true);
   };
@@ -347,13 +347,13 @@ export default function Transactions() {
                 <label className="mb-2 block text-gray-700">Status</label>
                 <select
                   name="status"
-                  value={formData.status ?? 'Pending'}
+                  value={formData.status ?? 'pending'}
                   onChange={handleInputChange}
                   className="w-full rounded-lg border px-3 py-2"
                 >
-                  <option value="Pending">Pending</option>
-                  <option value="Completed">Completed</option>
-                  <option value="Failed">Failed</option>
+                  <option value="pending">Pending</option>
+                  <option value="completed">Completed</option>
+                  <option value="failed">Failed</option>
                 </select>
               </div>
               
@@ -455,13 +455,13 @@ export default function Transactions() {
                 <label className="mb-2 block text-gray-700">Status</label>
                 <select
                   name="status"
-                  value={formData.status ?? 'Pending'}
+                  value={formData.status ?? 'pending'}
                   onChange={handleInputChange}
                   className="w-full rounded-lg border px-3 py-2"
                 >
-                  <option value="Pending">Pending</option>
-                  <option value="Completed">Completed</option>
-                  <option value="Failed">Failed</option>
+                  <option value="pending">Pending</option>
+                  <option value="completed">Completed</option>
+                  <option value="failed">Failed</option>
                 </select>
               </div>
               

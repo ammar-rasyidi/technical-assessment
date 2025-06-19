@@ -91,6 +91,7 @@ export const create = async (req, res) => {
     const { username, transactionType, token, amount, status, description } = req.body;
     const errors = [];
     const validTypes = ['Stake', 'Borrow', 'Lend'];
+    const validStatuses = ['pending', 'completed', 'failed'];
 
     // Validation
     if (!validTypes.includes(transactionType)) {
@@ -226,6 +227,7 @@ export const update = async (req, res) => {
 
     const { username, transactionType, token, amount, status, description } = req.body;
     const validTypes = ['Stake', 'Borrow', 'Lend'];
+    const validStatuses = ['pending', 'completed', 'failed'];
     const errors = [];
 
     // Validation
