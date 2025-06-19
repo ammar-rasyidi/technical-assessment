@@ -209,6 +209,8 @@ export default function Transactions() {
                 <th className="px-4 py-3 text-left">Type</th>
                 <th className="px-4 py-3 text-left">Token</th>
                 <th className="px-4 py-3 text-left">Amount</th>
+                <th className="px-4 py-3 text-left">Status</th>
+                <th className="px-4 py-3 text-left">Description</th>
                 <th className="px-4 py-3 text-left">Date</th>
                 <th className="px-4 py-3 text-left">Actions</th>
               </tr>
@@ -233,22 +235,26 @@ export default function Transactions() {
                   </td>
                   <td className="border-b px-4 py-3 text-gray-800">{transaction.token}</td>
                   <td className="border-b px-4 py-3 text-gray-800">{transaction.amount}</td>
+                  <td className="border-b px-4 py-3 capitalize text-gray-800">{transaction.status || '—'}</td>
+                  <td className="border-b px-4 py-3 text-gray-800">{transaction.description || '—'}</td>
                   <td className="border-b px-4 py-3">
                     {new Date(transaction.createdAt).toLocaleDateString()}
                   </td>
-                  <td className="flex space-x-2 border-b px-4 py-3">
-                    <button
-                      onClick={() => openEditModal(transaction)}
-                      className="text-blue-600 hover:text-blue-800"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(transaction.id)}
-                      className="text-red-600 hover:text-red-800"
-                    >
-                      Delete
-                    </button>
+                  <td className="border-b px-4 py-3">
+                    <div className="flex space-x-2 px-4 py-3">
+                      <button
+                        onClick={() => openEditModal(transaction)}
+                        className="text-blue-600 hover:text-blue-800"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(transaction.id)}
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -336,7 +342,31 @@ export default function Transactions() {
                   required
                 />
               </div>
+
+              <div className="mb-4">
+                <label className="mb-2 block text-gray-700">Status</label>
+                <select
+                  name="status"
+                  value={formData.status ?? 'Pending'}
+                  onChange={handleInputChange}
+                  className="w-full rounded-lg border px-3 py-2"
+                >
+                  <option value="Pending">Pending</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Failed">Failed</option>
+                </select>
+              </div>
               
+              <div className="mb-4">
+                <label className="mb-2 block text-gray-700">Description</label>
+                <textarea
+                  name="description"
+                  value={formData.description ?? ''}
+                  onChange={handleInputChange}
+                  className="w-full rounded-lg border px-3 py-2"
+                />
+              </div>
+
               <div className="flex justify-end space-x-3">
                 <button
                   type="button"
@@ -418,6 +448,30 @@ export default function Transactions() {
                   min="0.01"
                   step="any"
                   required
+                />
+              </div>
+              
+              <div className="mb-4">
+                <label className="mb-2 block text-gray-700">Status</label>
+                <select
+                  name="status"
+                  value={formData.status ?? 'Pending'}
+                  onChange={handleInputChange}
+                  className="w-full rounded-lg border px-3 py-2"
+                >
+                  <option value="Pending">Pending</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Failed">Failed</option>
+                </select>
+              </div>
+              
+              <div className="mb-4">
+                <label className="mb-2 block text-gray-700">Description</label>
+                <textarea
+                  name="description"
+                  value={formData.description ?? ''}
+                  onChange={handleInputChange}
+                  className="w-full rounded-lg border px-3 py-2"
                 />
               </div>
               

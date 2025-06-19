@@ -88,11 +88,11 @@ export const index = async (req, res) => {
  */
 export const create = async (req, res) => {
   try {
-    const { username, transactionType, token, amount } = req.body;
+    const { username, transactionType, token, amount, status, description } = req.body;
     const errors = [];
     const validTypes = ['Stake', 'Borrow', 'Lend'];
 
-    // Manual validation
+    // Validation
     if (!validTypes.includes(transactionType)) {
       errors.push(`transactionType must be one of: ${validTypes.join(', ')}`);
     }
@@ -112,11 +112,21 @@ export const create = async (req, res) => {
       });
     }
 
+    if (status && !validStatuses.includes(status)) {
+      errors.push(`status must be one of: ${validStatuses.join(', ')}`);
+    }
+
+    if (description && typeof description !== 'string') {
+      errors.push('description must be a string');
+    }
+
     const newTransaction = new Transaction({
       username,
       transactionType,
       token: token.trim(),
-      amount
+      amount,
+      status,
+      description
     });
 
     const savedTransaction = await newTransaction.save();
@@ -214,28 +224,33 @@ export const update = async (req, res) => {
       });
     }
 
-    const { username, transactionType, token, amount } = req.body;
+    const { username, transactionType, token, amount, status, description } = req.body;
     const validTypes = ['Stake', 'Borrow', 'Lend'];
     const errors = [];
 
-    // Validate username if present
+    // Validation
     if (username && (typeof username !== 'string' || username.trim() === '')) {
       errors.push('username must be a non-empty string');
     }
 
-    // Validate transactionType if present
     if (transactionType && !validTypes.includes(transactionType)) {
       errors.push(`transactionType must be one of: ${validTypes.join(', ')}`);
     }
 
-    // Validate token if present
     if (token && (typeof token !== 'string' || token.trim() === '')) {
       errors.push('token must be a non-empty string');
     }
 
-    // Validate amount if present
     if (amount && (typeof amount !== 'number' || amount <= 0)) {
       errors.push('amount must be a positive number');
+    }
+
+    if (status && !validStatuses.includes(status)) {
+      errors.push(`status must be one of: ${validStatuses.join(', ')}`);
+    }
+
+    if (description && typeof description !== 'string') {
+      errors.push('description must be a string');
     }
 
     // Return validation errors if any

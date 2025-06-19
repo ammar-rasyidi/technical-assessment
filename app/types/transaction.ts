@@ -4,7 +4,7 @@ export interface Transaction {
   transactionType: 'Stake' | 'Borrow' | 'Lend';
   token: string;
   amount: number;
-  status?: string;
+  status: 'Pending' | 'Completed' | 'Failed';
   description?: string;
   createdAt: string;
   updatedAt: string;

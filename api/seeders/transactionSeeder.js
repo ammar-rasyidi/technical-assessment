@@ -13,6 +13,8 @@ const TOKENS = [
   'TRX', 'UNI', 'LINK', 'ATOM', 'XLM'
 ];
 
+const STATUSES = ['pending', 'completed', 'failed'];
+
 const generateUsername = () => {
   const prefixes = ['Crypto', 'DeFi', 'Block', 'Chain', 'NFT', 'Web3', 'Meta', 'Bit', 'Coin', 'Token'];
   const suffixes = ['Trader', 'Whale', 'Pro', 'Master', 'Guru', 'Explorer', 'Voyager', 'Hodler', 'Miner', 'Validator'];
@@ -29,6 +31,10 @@ const generateUsername = () => {
     default:
       return `${names[Math.floor(Math.random() * names.length)]}${Math.floor(Math.random() * 1000)}`;
   }
+};
+
+const generateDescription = (type, token, amount) => {
+  return `User performed a ${type.toLowerCase()} of ${amount} ${token}`;
 };
 
 // Generate transaction data
@@ -70,6 +76,9 @@ const generateTransactions = (count) => {
     const rawAmount = factor.min + (Math.random() * (factor.max - factor.min));
     const amount = parseFloat(rawAmount.toFixed(factor.decimals));
     
+    const status = STATUSES[Math.floor(Math.random() * STATUSES.length)];
+    const description = generateDescription(transactionType, token, amount);
+    
     // Generate realistic timestamp (last 90 days)
     const daysAgo = Math.floor(Math.random() * 90);
     const hoursAgo = Math.floor(Math.random() * 24);
@@ -84,6 +93,8 @@ const generateTransactions = (count) => {
       transactionType,
       token,
       amount,
+      status,
+      description,
       createdAt,
       updatedAt: createdAt
     });
@@ -112,7 +123,7 @@ const seedDatabase = async () => {
     // Exit process
     process.exit(0);
   } catch (err) {
-    console.error('❌failed to add transactions data:', err.message);
+    console.error('Failed to add transactions data:', err.message);
     process.exit(1);
   }
 };
